@@ -84,7 +84,9 @@ def calcCorr(windows,N,REGIONS):
         A2,dA2,dB2 = calcAfromB(B2,aep2,ass2,ac2,N)
         Adiff = A1-A2
         C = np.where(Adiff>0,Adiff/A2,Adiff/A1)
+        np.fill_diagonal(C, 1.0)
         dC = np.where(Adiff>0,np.sqrt(dA1**2/A1**2 + A1**2*dA2**2/A2**4),np.sqrt(dA2**2/A1**2 + A2**2*dA1**2/A1**4))
+        np.fill_diagonal(dC, 0.0)
         corrC.append(C)
         corrdC.append(dC)
         corrB1.append(B1)
